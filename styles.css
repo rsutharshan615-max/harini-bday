@@ -21,9 +21,13 @@
 .gift-section { padding-top: 40px; }
 .gift-stage { display:grid; place-items:center; gap:16px; max-width: 700px; margin: 0 auto; position: relative; }
 .gift-simple { display:grid; place-items:center; gap:12px; padding: 10px 0; }
-.gift-simple { display:grid; place-items:center; gap:18px; padding: 16px 0 6px; }
+.gift-simple { display:grid; place-items:center; gap:22px; padding: 22px 0 16px; }
 .arrow-down { width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 22px solid var(--accent); filter: drop-shadow(0 6px 14px #0006); animation: bounce 1.2s ease-in-out infinite; }
 @keyframes bounce { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(12px) } }
+.arrows { display:grid; gap:10px; cursor:pointer; }
+.arrows .arrow-down:nth-child(1){ opacity:.8; }
+.arrows .arrow-down:nth-child(2){ opacity:.9; transform: translateY(4px); }
+.arrows .arrow-down:nth-child(3){ transform: translateY(8px); }
 .gift-box { position: relative; width: clamp(200px, 60vw, 340px); height: clamp(150px, 42vw, 260px); perspective: 900px; }
 .gift-box, #openGiftBtn { cursor: pointer; }
 #openGiftBtn { position: relative; z-index: 3; }
