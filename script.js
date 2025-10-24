@@ -257,13 +257,16 @@ function init(){
   const countdownEl = qs('#countdown');
 
   // Single-track: do not attach playlist sequencer
-  audio.onended = () => { enterBtn.textContent = 'Play'; };
+  audio.onended = () => { enterBtn.textContent = '🎵'; };
 
-  function setSoundLabel(){ soundBtn.textContent = (audio.muted || audio.volume===0) ? 'Sound On' : 'Sound Off'; }
+  function setSoundLabel(){
+    const muted = (audio.muted || audio.volume===0);
+    soundBtn.textContent = muted ? 'Music Off 🔇' : 'Music On 🔊';
+  }
   soundBtn.addEventListener('click', ()=> { audio.muted = !audio.muted; setSoundLabel(); });
 
-  // Play/Pause button behavior
-  enterBtn.textContent = 'Play';
+  // Play/Pause button behavior (emoji button)
+  enterBtn.textContent = '🎵';
   enterBtn.addEventListener('click', async () => {
     // Ensure we have a source: prefer first of playlist if available
     if (!audio.src || audio.src.startsWith('data:') || audio.src === CONFIG.music){
@@ -273,11 +276,11 @@ function init(){
       }
     }
     if (audio.paused){
-      audio.play().then(()=>{ enterBtn.textContent = 'Pause'; }).catch(()=>{});
+      audio.play().then(()=>{ enterBtn.textContent = '⏸️'; }).catch(()=>{});
       introSequence();
     } else {
       audio.pause();
-      enterBtn.textContent = 'Play';
+      enterBtn.textContent = '🎵';
     }
   });
 
