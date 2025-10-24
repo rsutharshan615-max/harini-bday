@@ -385,6 +385,7 @@ function init(){
 
   // Gift box interactions
   initGiftBox();
+  initMiniGift();
 }
 
 // ====== Enforce custom back quotes on first six cards ======
@@ -420,6 +421,21 @@ function initGiftBox(){
   stage.addEventListener('click', (e)=>{
     if (!stage.classList.contains('open') && (e.target === stage)) open();
   });
+}
+
+// ====== Mini Gift (above footer) ======
+function initMiniGift(){
+  const wrap = qs('.mini-gift-wrap');
+  const mini = qs('#miniGift');
+  if (!wrap || !mini) return;
+  const open = () => {
+    if (wrap.classList.contains('open')) return;
+    mini.classList.add('open');
+    wrap.classList.add('open');
+    try { confetti({ particleCount: 80, spread: 60, origin: { y: 0.5 } }); } catch {}
+  };
+  mini.addEventListener('click', open);
+  mini.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' ') { e.preventDefault(); open(); } });
 }
 
 // ====== Cinematic Text ======

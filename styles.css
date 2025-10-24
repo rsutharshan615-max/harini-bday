@@ -3,8 +3,9 @@
 .gift-section { padding-top: 40px; }
 .gift-stage { display:grid; place-items:center; gap:16px; max-width: 700px; margin: 0 auto; position: relative; }
 .gift-simple { display:grid; place-items:center; gap:12px; padding: 10px 0; }
-.arrow-down { width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 16px solid var(--accent); filter: drop-shadow(0 6px 14px #0006); animation: bounce 1.2s ease-in-out infinite; }
-@keyframes bounce { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(6px) } }
+.gift-simple { display:grid; place-items:center; gap:18px; padding: 16px 0 6px; }
+.arrow-down { width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 22px solid var(--accent); filter: drop-shadow(0 6px 14px #0006); animation: bounce 1.2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(12px) } }
 .gift-box { position: relative; width: clamp(200px, 60vw, 340px); height: clamp(150px, 42vw, 260px); perspective: 900px; }
 .gift-box, #openGiftBtn { cursor: pointer; }
 #openGiftBtn { position: relative; z-index: 3; }
@@ -192,3 +193,19 @@ section { position: relative; padding: 96px 24px; }
 /* Footer */
 .footer { padding: 36px 16px 80px; text-align: center; color: var(--muted); font-size: 12px; display:grid; gap:10px; place-items:center; }
 .footer .theme { display:flex; align-items:center; gap:8px; }
+
+/* Mini Gift above footer */
+.mini-gift-section { padding: 20px 16px 0; }
+.mini-gift-wrap { display:grid; place-items:center; gap:10px; }
+.mini-gift { position: relative; width: 120px; height: 90px; perspective: 800px; cursor: pointer; }
+.mini-gift .box { position:absolute; inset: 24% 0 0 0; background: linear-gradient(180deg,#1a2342,#0f1730); border:1px solid #2a3556; border-radius: 10px; box-shadow: 0 12px 28px #0008; }
+.mini-gift .lid { position:absolute; left:0; right:0; top:0; height: 26%; background: linear-gradient(180deg,#24315a,#101a36); border:1px solid #2a3556; border-radius: 8px; transform-origin: 50% 100%; box-shadow: 0 10px 22px #0007; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.mini-gift .ribbon { position:absolute; background: linear-gradient(180deg, #ff8a5b, #ff5bbd); }
+.mini-gift .ribbon-vert { width: 10px; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; filter: drop-shadow(0 3px 6px #0007); }
+.mini-gift .ribbon-horz { height: 10px; left: 0; right: 0; top: 50%; transform: translateY(-50%); filter: drop-shadow(0 3px 6px #0007); }
+.mini-gift .bow { position:absolute; top: -8px; width: 16px; height: 16px; border: 5px solid #ff78b2; border-radius: 50%; box-shadow: inset 0 0 6px #0004, 0 4px 10px #0006; }
+.mini-gift .bow-left { left: calc(50% - 24px); }
+.mini-gift .bow-right { right: calc(50% - 24px); }
+.mini-gift.open .lid { transform: rotateX(-60deg); }
+.mini-gift-msg { color:#e8ecf8; font-weight:700; text-shadow:0 6px 20px #000; opacity:.0; transform: translateY(6px); transition: opacity .45s ease, transform .45s ease; }
+.mini-gift-wrap.open .mini-gift-msg { opacity:1; transform: translateY(0); }
