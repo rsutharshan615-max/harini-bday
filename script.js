@@ -49,12 +49,12 @@ No matter how far we wander, we will always find our way back to each other.
 Happy Birthday, Harini. With all my love.`,
   // Optional per-card backs (first six cards)
   cardBacks: [
-    'Happy birthday my vaanara kutti enjoy your day with smile .',
-    'My chella akka thanks for being my soul .',
-    'Iam always there for you my uyire',
-    'My Bestest friend ever.Iam so lucky to have you in my life thangam',
-    'Treat mukkiyam uyire',
-    'Thanks for everything my dear'
+    'Happy birthday my vaanara kutti enjoy your day with smile . ❤️',
+    'My chella akka thanks for being my soul . ❤️',
+    'Iam always there for you my uyire ❤️',
+    'My Bestest friend ever.Iam so lucky to have you in my life thangam ❤️',
+    'Treat mukkiyam uyire ❤️',
+    'Thanks for everything my dear ❤️'
   ],
   // Default playlist to seed (files placed in /music)
   playlist: [
