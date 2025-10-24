@@ -87,6 +87,7 @@ section { position: relative; padding: 96px 24px; }
 .slideshow-frame { position: relative; width: min(1000px, 92vw); height: clamp(220px, 55vw, 520px); margin: 0 auto; border-radius: 16px; overflow: hidden; border:1px solid #2a3556; box-shadow: 0 12px 40px #0008; background:#0c1224; display:grid; place-items:center; }
 #slideImg { width: 100%; height: 100%; object-fit: cover; transform-origin: center; will-change: transform, opacity; }
 .slideshow .controls { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display:flex; gap:10px; }
+.slideshow-frame.story-playing .controls { display: none !important; }
 
 /* Inline Story (IG-like) */
 .story-inline { position: absolute; inset: 0; display:grid; place-items:center; padding: 24px; }
