@@ -77,15 +77,23 @@
 
     
 
-    <!-- Wish Wall -->
-    <section class="wishes" id="wishes">
-      <h2 class="section-title">Wish Wall</h2>
-      <form id="wishForm" class="wish-form">
-        <input id="wishName" type="text" placeholder="Your name" />
-        <input id="wishText" type="text" placeholder="Leave a wish..." required />
-        <button class="btn primary" type="submit">Post</button>
-      </form>
-      <ul id="wishList" class="wish-list"></ul>
+    <!-- Gift Box -->
+    <section class="gift-section" id="gift">
+      <h2 class="section-title">Open Your Gift</h2>
+      <div class="gift-stage">
+        <div class="gift-box" id="giftBox" aria-label="Birthday gift">
+          <div class="lid">
+            <div class="bow bow-left"></div>
+            <div class="bow bow-right"></div>
+          </div>
+          <div class="box">
+            <div class="ribbon ribbon-vert"></div>
+            <div class="ribbon ribbon-horz"></div>
+          </div>
+        </div>
+        <button id="openGiftBtn" class="btn primary">Open Gift</button>
+        <div id="giftWish" class="gift-wish" aria-live="polite">Happy Birthday, Harini! May your year be full of joy, laughter, and all your favorite things. ✨</div>
+      </div>
     </section>
 
     <!-- Final Wish -->

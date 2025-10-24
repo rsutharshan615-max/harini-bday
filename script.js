@@ -381,6 +381,9 @@ function init(){
   enforceCardBackQuotes();
   // Re-apply shortly after dynamic renders
   setTimeout(enforceCardBackQuotes, 300);
+
+  // Gift box interactions
+  initGiftBox();
 }
 
 // ====== Enforce custom back quotes on first six cards ======
