@@ -53,6 +53,15 @@
       </div>
     </section>
 
+    <!-- Chat Launcher -->
+    <section class="chat-launch" id="chatLaunch">
+      <button id="openChatBtn" class="chat-btn" type="button" aria-label="Open chat">
+        <span class="chat-icon" aria-hidden="true">💬</span>
+        <span>Chat with Brother Heart</span>
+        <span class="chev" aria-hidden="true">›</span>
+      </button>
+    </section>
+
     <!-- Story Reel -->
     <section class="slideshow" id="slideshow">
       <h2 class="section-title">Memories Reel ❤️</h2>
@@ -124,6 +133,20 @@
         </select>
       </div>
     </footer>
+    <!-- Chat Modal -->
+    <div id="chatModal" class="chat-modal hidden" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+      <div class="chat-sheet">
+        <div class="chat-head">
+          <h3 id="chatTitle">Brother Heart</h3>
+          <button id="closeChatBtn" class="chat-close" aria-label="Close">×</button>
+        </div>
+        <div id="chatLog" class="chat-log" aria-live="polite"></div>
+        <form id="chatForm" class="chat-form" autocomplete="off">
+          <input id="chatInput" type="text" placeholder="Write a message…" required />
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
   </main>
 
   <!-- Lightbox -->

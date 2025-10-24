@@ -386,6 +386,7 @@ function init(){
   // Gift box interactions
   initGiftBox();
   initMiniGift();
+  initChat();
 }
 
 // ====== Enforce custom back quotes on first six cards ======
@@ -420,6 +421,88 @@ function initGiftBox(){
   // Safety net: delegate on stage background
   stage.addEventListener('click', (e)=>{
     if (!stage.classList.contains('open') && (e.target === stage)) open();
+  });
+}
+
+// ====== Simple Chat (Brother Heart) ======
+function initChat(){
+  const openBtn = qs('#openChatBtn');
+  const modal = qs('#chatModal');
+  const closeBtn = qs('#closeChatBtn');
+  const form = qs('#chatForm');
+  const input = qs('#chatInput');
+  const log = qs('#chatLog');
+  if (!openBtn || !modal || !closeBtn || !form || !input || !log) return;
+
+  const open = () => { modal.classList.remove('hidden'); input.focus(); };
+  const close = () => { modal.classList.add('hidden'); };
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e)=>{ if (e.target === modal) close(); });
+
+  const addMsg = (text, me=false) => {
+    const div = document.createElement('div');
+    div.className = 'chat-msg' + (me ? ' me' : '');
+    div.textContent = text;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  // Seed greeting
+  if (!log.__seeded){
+    addMsg('Hi akka! I am here for you. What do you want to talk about today? 💜');
+    log.__seeded = true;
+  }
+
+  // Q&A knowledge
+  const qa = [
+    {
+      keys: ['what am i to my brother', 'who am i to my brother', 'what am i for my brother'],
+      answer: "You’re literally his everything. There are no words to describe it — that’s the bond you share. More than anything, he always wants your care and support throughout his life. ❤"
+    },
+    {
+      keys: ['why does my brother', 'what have i done for him', 'why he do many things for me'],
+      answer: "You brightened his life, purified his soul, gave him a shoulder to lean on and cry during downfalls, time to clear his thoughts, and the greatest moral advice (even the slipper shots!). Most importantly, you gave him the confidence to stand, rise, and fight. Your conversations are his energy — they keep him going and make his days meaningful. 💫"
+    },
+    {
+      keys: ['will he always be my friend', 'will he always be my brother', 'stay forever', 'forever friend'],
+      answer: "He literally has the same question — will you stay forever? He won’t force you, but he truly wants you as his friend and sister always. Your mind shouldn’t doubt his presence because you are his soul. He’ll carry that bond every single day, ready to do anything for your happiness. 🤝❤️"
+    },
+    {
+      keys: ['what are my favorites', 'my favourites', 'favorites', 'favourites'],
+      answer: "Favorites — Colour: Black 🖤 • Snack: Pani Puri 😋 • Food: Anything humans can consume 🍽️ • Relationship: Brother 👨‍👧"
+    },
+    {
+      keys: ['what are my brother’s wishes', 'brother wishes', 'his wishes'],
+      answer: "His wishes: To play with you • To spend time with you • To have lunch with you • To roam around with you • To have little fights with you. All with you. 💖"
+    }
+  ];
+
+  function findAnswer(txt){
+    const t = txt.toLowerCase();
+    for (const item of qa){
+      if (item.keys.some(k => t.includes(k))) return item.answer;
+    }
+    return null;
+  }
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const text = (input.value || '').trim();
+    if (!text) return;
+    addMsg(text, true);
+    input.value = '';
+    // Q&A reply if matched, else friendly default
+    const matched = findAnswer(text);
+    const replies = [
+      'Always with you, akka. ❤️',
+      'That makes me smile! 😊',
+      'Proud of you. Keep shining. ✨',
+      'I hear you. I’m here. 🤗',
+      'Let’s celebrate every little moment! 🎉'
+    ];
+    const reply = matched || replies[Math.floor(Math.random()*replies.length)];
+    setTimeout(()=> addMsg(reply), 350);
   });
 }
 
