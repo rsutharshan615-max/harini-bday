@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <title>Happy Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20251024-2" />
+  <meta name="description" content="A cinematic birthday wish experience." />
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="true">
+    <div class="spinner"></div>
+    <p>Creating magic...</p>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgm" preload="auto" loop></audio>
+
+  <!-- Scene Canvas (stars/particles) -->
+  <canvas id="scene"></canvas>
+
+  <!-- Main -->
+  <main id="app" class="hidden">
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="glow"></div>
+      <div class="content">
+        <h1 class="title"><span class="small">Happy Birthday</span><br><span id="friendName">Friend</span></h1>
+        <p class="subtitle" id="tagline">Wishing you moments as beautiful as you.</p>
+        <p class="countdown" id="countdown"></p>
+        <div class="actions">
+          <button id="enterBtn" class="btn primary">Click Song</button>
+          <button id="soundBtn" class="btn ghost" aria-label="Toggle music">Sound Off</button>
+        </div>
+        <div class="scroll">
+          <span>WELCOME HARIN</span>
+          <div class="mouse"><div class="wheel"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Messages Cinematic -->
+    <section class="cinematic" id="messages">
+      <div class="panel">
+        <p class="line" id="line1"></p>
+        <p class="line" id="line2"></p>
+        <p class="line" id="line3"></p>
+      </div>
+    </section>
+
+    <!-- Story Reel -->
+    <section class="slideshow" id="slideshow">
+      <h2 class="section-title">Memories Reel</h2>
+      <div class="slideshow-frame">
+        <img id="slideImg" alt="Slideshow" />
+        <div class="controls">
+          <button class="btn primary" id="playReelBtn">Play Story Reel</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+      <h2 class="section-title">Our Moments</h2>
+      <div class="uploader" aria-label="Add your photos">
+        <input id="uploadInput" type="file" accept="image/*" multiple hidden />
+        <button id="uploadBtn" class="btn ghost" type="button">Add Photos</button>
+        <small class="hint">Tip: You can also drag & drop images here.</small>
+      </div>
+      <div id="galleryGrid" class="grid"></div>
+    </section>
+
+    
+
+    <!-- Wish Wall -->
+    <section class="wishes" id="wishes">
+      <h2 class="section-title">Wish Wall</h2>
+      <form id="wishForm" class="wish-form">
+        <input id="wishName" type="text" placeholder="Your name" />
+        <input id="wishText" type="text" placeholder="Leave a wish..." required />
+        <button class="btn primary" type="submit">Post</button>
+      </form>
+      <ul id="wishList" class="wish-list"></ul>
+    </section>
+
+    <!-- Final Wish -->
+    <section class="final" id="final">
+      <h2 class="big-wish" id="bigWish">Happy Birthday!</h2>
+      <button id="confettiBtn" class="btn fire">Celebrate 🎉</button>
+      <div class="share">
+        <button id="shareBtn" class="btn ghost">Share this page</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Made with love for <span id="footerName">you</span> ✨</p>
+      <div class="theme">
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect">
+          <option value="starry">Starry Night</option>
+          <option value="elegant">Elegant</option>
+          <option value="neon">Neon</option>
+          <option value="pastel">Pastel</option>
+        </select>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true">
+    <button id="lightboxClose" class="close" aria-label="Close">×</button>
+    <img id="lightboxImg" alt="Memory" />
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- App -->
+  <script src="script.js?v=20251024-2"></script>
+</body>
+</html>
