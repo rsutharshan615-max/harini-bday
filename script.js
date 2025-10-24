@@ -246,7 +246,7 @@ function init(){
   qs('#tagline').textContent = CONFIG.tagline;
   qs('#bigWish').textContent = CONFIG.bigWish;
 
-  // Music
+  // Music (single-track mode)
   const audio = qs('#bgm');
   audio.src = CONFIG.music;
   let soundOn = false;
@@ -256,41 +256,29 @@ function init(){
   const songInput = qs('#songInput');
   const countdownEl = qs('#countdown');
 
-  // Ensure onended handler is set early
-  setupAudioSequencer();
+  // Single-track: do not attach playlist sequencer
+  audio.onended = () => { enterBtn.textContent = 'Play'; };
 
-  function toggleSound(desired){
-    soundOn = desired ?? !soundOn;
-    soundBtn.textContent = soundOn ? 'Sound On' : 'Sound Off';
-    if(soundOn){ audio.volume = 0.9; audio.play().catch(()=>{}); }
-    else{ audio.pause(); }
-  }
-  soundBtn.addEventListener('click', ()=> toggleSound());
+  function setSoundLabel(){ soundBtn.textContent = (audio.muted || audio.volume===0) ? 'Sound On' : 'Sound Off'; }
+  soundBtn.addEventListener('click', ()=> { audio.muted = !audio.muted; setSoundLabel(); });
+
+  // Play/Pause button behavior
+  enterBtn.textContent = 'Play';
   enterBtn.addEventListener('click', async () => {
-    // Start or advance playlist and run intro animations
-    toggleSound(true);
-    await ensurePlaylistReady();
-    if (__playlist && __playlist.length){
-      if (!window.__playlistStarted){
-        __songIndex = 0;
-        audio.src = __playlist[__songIndex];
-        audio.play().catch(()=>{});
-        window.__playlistStarted = true;
-      } else {
-        // advance to next track if available, else stop at end
-        if (__songIndex < __playlist.length - 1) {
-          __songIndex += 1;
-          audio.src = __playlist[__songIndex];
-          audio.play().catch(()=>{});
-        } else {
-          audio.pause();
-        }
+    // Ensure we have a source: prefer first of playlist if available
+    if (!audio.src || audio.src.startsWith('data:') || audio.src === CONFIG.music){
+      await ensurePlaylistReady();
+      if (__playlist && __playlist.length){
+        audio.src = __playlist[0];
       }
-      // expose for console checks
-      window.__playlist = __playlist;
-      window.__songIndex = __songIndex;
     }
-    introSequence();
+    if (audio.paused){
+      audio.play().then(()=>{ enterBtn.textContent = 'Pause'; }).catch(()=>{});
+      introSequence();
+    } else {
+      audio.pause();
+      enterBtn.textContent = 'Play';
+    }
   });
 
   // Song upload + persist
@@ -868,22 +856,7 @@ let __reelPairs = [];
 let __playlist = [];
 let __songIndex = 0;
 
-function setupAudioSequencer(){
-  const audio = qs('#bgm');
-  if (!audio) return;
-  audio.onended = () => {
-    if (!__playlist || !__playlist.length) return;
-    if (__songIndex < __playlist.length - 1) {
-      __songIndex += 1;
-      audio.src = __playlist[__songIndex];
-      audio.play().catch(()=>{});
-      window.__songIndex = __songIndex;
-    } else {
-      // finished last track: stop
-      // do not loop
-    }
-  };
-}
+function setupAudioSequencer(){ /* disabled in single-track mode */ }
 
 // Build playlist if not yet available (from IndexedDB or CONFIG playlist)
 async function ensurePlaylistReady(){
@@ -1072,6 +1045,8 @@ async function initWishes(){
       const wish = { id: Date.now(), name, text, ts: Date.now() };
       await idbPut('wishes', wish);
       renderWish(wish, true);
+      // celebratory, neat but subtle
+      try { tinyConfetti(); } catch {}
       qs('#wishText').value = '';
     });
   } catch {}
@@ -1089,7 +1064,12 @@ function renderWish(wish, prepend=false){
   del.addEventListener('click', async ()=>{ await idbDelete('wishes', wish.id); li.remove(); });
   actions.appendChild(del);
   li.appendChild(left); li.appendChild(actions);
+  // animate in neatly
+  li.classList.add('animate-in');
+  li.addEventListener('animationend', ()=> li.classList.remove('animate-in'), { once: true });
   if (prepend && list.firstChild) list.insertBefore(li, list.firstChild); else list.appendChild(li);
+  // ensure visible
+  try { li.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch {}
 }
 
 // ====== Theme Switcher
