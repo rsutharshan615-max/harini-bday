@@ -974,6 +974,8 @@ function initInlineStory(){
 
 async function startInlineStory(){
   initInlineStory();
+  const frame = qs('.slideshow-frame');
+  if (frame) frame.classList.add('story-playing');
   const pairs = await ensureReelPairsLoadedForInline();
   if (!pairs.length) return;
   __storyIdx = 0;

@@ -80,11 +80,12 @@ section { position: relative; padding: 96px 24px; }
 /* Mobile tuning for inline story: avoid hard crop and fit better */
 @media (max-width: 540px) {
   .slideshow-frame { height: clamp(320px, 90vw, 520px); }
+  .slideshow-frame.story-playing .controls { display: none; }
   .story-inline { padding: 12px; }
   .story-inline .segments { top:8px; left:8px; right:8px; }
   .story-inline .circle { width: min(78vw, 280px); height: min(78vw, 280px); border-width: 3px; }
   .story-inline .circle img { object-position: center top; }
-  .story-inline .caption { font-size: 14px; padding: 0 6px; }
+  .story-inline .caption { font-size: 14px; padding: 0 6px; margin-top: 10px; }
 }
 @media (max-width: 360px) {
   .slideshow-frame { height: clamp(340px, 100vw, 560px); }
