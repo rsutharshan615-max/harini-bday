@@ -207,5 +207,6 @@ section { position: relative; padding: 96px 24px; }
 .mini-gift .bow-left { left: calc(50% - 24px); }
 .mini-gift .bow-right { right: calc(50% - 24px); }
 .mini-gift.open .lid { transform: rotateX(-60deg); }
-.mini-gift-msg { color:#e8ecf8; font-weight:700; text-shadow:0 6px 20px #000; opacity:.0; transform: translateY(6px); transition: opacity .45s ease, transform .45s ease; }
-.mini-gift-wrap.open .mini-gift-msg { opacity:1; transform: translateY(0); }
+.mini-gift-msg { color:#e8ecf8; font-weight:800; text-shadow:0 6px 20px #000; opacity:.0; transform: translateY(6px) scale(.96); transition: opacity .45s ease, transform .45s ease; letter-spacing: .02em; }
+.mini-gift-wrap.open .mini-gift-msg { opacity:1; transform: translateY(0) scale(1); animation: giftPop .5s cubic-bezier(.2,.8,.2,1); }
+@keyframes giftPop { 0%{ transform: translateY(10px) scale(.9); text-shadow:0 10px 24px #000 } 60%{ transform: translateY(0) scale(1.06); text-shadow:0 8px 28px #000 } 100%{ transform: translateY(0) scale(1); text-shadow:0 6px 20px #000 } }
