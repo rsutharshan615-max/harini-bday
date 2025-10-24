@@ -360,9 +360,7 @@ function init(){
   // Always-on subtle fireworks confetti
   ambientConfettiLoop();
 
-  // UI tweaks: rename Enter button, remove Set Song, and hide fireworks section
-  const __enterEl = qs('#enterBtn');
-  if (__enterEl) __enterEl.textContent = 'Click Song';
+  // UI tweaks: remove Set Song, and hide fireworks section
   const __setSongEl = qs('#setSongBtn');
   if (__setSongEl) __setSongEl.remove();
   const __fwSection = qs('.fireworks');
@@ -372,7 +370,7 @@ function init(){
   const __soundBtnEl = qs('#soundBtn');
   const __audioEl = qs('#bgm');
   if (__soundBtnEl && __audioEl) {
-    const __setLabel = () => { __soundBtnEl.textContent = (__audioEl.muted || __audioEl.volume === 0) ? 'Sound On' : 'Sound Off'; };
+    const __setLabel = () => { __soundBtnEl.textContent = (__audioEl.muted || __audioEl.volume === 0) ? 'Music Off 🔇' : 'Music On 🔊'; };
     __setLabel();
     __soundBtnEl.addEventListener('click', () => setTimeout(__setLabel, 0));
   }
