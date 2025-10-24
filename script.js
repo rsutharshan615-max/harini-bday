@@ -402,6 +402,26 @@ function enforceCardBackQuotes(){
   } catch {}
 }
 
+// ====== Gift Box ======
+function initGiftBox(){
+  const stage = qs('.gift-stage');
+  if (!stage) return;
+  const box = qs('#giftBox');
+  const btn = qs('#openGiftBtn');
+  const open = () => {
+    if (stage.classList.contains('open')) return;
+    stage.classList.add('open');
+    try { confetti({ particleCount: 120, spread: 70, origin: { y: 0.3 } }); } catch {}
+    try { stage.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch {}
+  };
+  if (btn) { btn.style.pointerEvents = 'auto'; btn.addEventListener('click', open); btn.addEventListener('keydown', (e)=>{ if((e.key==='Enter'||e.key===' ')&&!stage.classList.contains('open')){ e.preventDefault(); open(); } }); }
+  if (box) { box.style.pointerEvents = 'auto'; box.addEventListener('click', open); }
+  // Safety net: delegate on stage background
+  stage.addEventListener('click', (e)=>{
+    if (!stage.classList.contains('open') && (e.target === stage)) open();
+  });
+}
+
 // ====== Cinematic Text ======
 function typeCinematic(lines){
   const ids = ['#line1','#line2','#line3'];
